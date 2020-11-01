@@ -1,15 +1,14 @@
 <?php  
     require_once('../db/connection.php');
-    $tablename = 'tbl_courses';
+    $tablename = 'tbl_posts';
     $sqlQuery = "create table ". $tablename ."(
-        course_id int(6) unsigned auto_increment primary key, 
-        course_no varchar(10) not null,
-        section varchar(30) not null, 
-        descriptive_title varchar(255) not null,
-        teacher_id varchar(10) not null,
-        student_id varchar(10) not null,
-        course_profile varchar(255), 
-        course_code varchar(10) not null,
+        post_id int(6) unsigned auto_increment primary key, 
+        title varchar(100), 
+        description text,  
+        type varchar(100),
+        location varchar(255),
+        teacher_id int(11),
+        course_id int(11),
         created_at timestamp default current_timestamp,
         updated_at timestamp default current_timestamp on update current_timestamp
     )"; 

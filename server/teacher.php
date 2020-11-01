@@ -13,7 +13,7 @@
             $row = $result->fetch_assoc();
                 if(password_verify($teacher['password'], $row['password'])){
                     $_SESSION['isLoggedIn'] = $row['type'];
-                    $_SESSION['id'] = $row['teacher_id'];
+                    $_SESSION['teacher_id'] = $row['teacher_id'];
                     header("location: ../dashboard_teacher.php");
                 }else{
                     $_SESSION['error'] = "Password did not match with the email. "; 
@@ -25,12 +25,22 @@
         } 
     }elseif (isset($_POST['btn_addCourse'])) {
         $data = [
-            
-        ];
-
-        echo $_POST['course_no'];
-        echo $_POST['section'];
-        echo $_POST['title'];
+            'course_no' => $_POST['course_no'],
+            'section'   => $_POST['section'],
+            'title'     => $_POST['title']
+        ]; 
+        $sqlQuery = "insert into tbl_courses(course_no, section, descriptive_title, teacher_id) values(
+            '". $data['course_no'] ."',
+            '". $data['section'] ."',
+            '". $data['title'] ."',
+            '". $_SESSION['id'] ."'
+            )";
+        if($conn->query($sqlQuery) === true){
+            $_SESSION['message'] = "New Course Added: ". $data['title'];
+            header("location: ../dashboard_teacher.php");
+        }else{
+            echo $conn->error;
+        }
         
     }
 
