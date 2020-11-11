@@ -7,9 +7,7 @@
         //     'description' => $_POST['description'],
         //     'type' => $_POST['type'],
 
-        // ];
-          
-        mkdir("../Uploads/".$_SESSION['teacher_id']."/hello");
+        // ]; 
         $target = "../Uploads/".basename($_FILES['uploaded_file']['name']);
         $image = $_FILES['uploaded_file']['name'];
         $extension = pathinfo($image, PATHINFO_EXTENSION);
